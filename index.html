@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Stróżak Bus — przewozy Mszana Dolna · Niedźwiedź · Konina · Poręba Wielka · Koninki</title>
+  <meta name="description" content="Przewozy regularne Mszana Dolna – Konina, Mszana Dolna – Poręba Górna, Mszana Dolna – Koninki oraz przewozy okazjonalne: wesela, komunie, wycieczki. Rozkład jazdy, busy na mapie i bilet miesięczny w aplikacji.">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta property="og:title" content="Stróżak Bus — przewozy regularne i okazjonalne">
+  <meta property="og:description" content="Rozkład jazdy, busy na mapie i bilet miesięczny w aplikacji z Apple Wallet.">
+  <meta property="og:image" content="assets/img/og.png">
+  <meta property="og:locale" content="pl_PL">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=3">
+</head>
+<body>
+
+<!-- intro: logo rysuje się samo -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__logo" id="intro-logo"></div>
+</div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a href="#top" class="nav__brand" aria-label="Stróżak Bus — strona główna">
+      <img src="assets/img/strozak-logo.svg" alt="Stróżak" width="132" height="35">
+    </a>
+    <nav class="nav__links" id="nav-links" aria-label="Menu główne">
+      <a href="#oferta">Oferta</a>
+      <a href="#rozklad">Rozkład</a>
+      <a href="#na-zywo">Busy na mapie</a>
+      <a href="#siec">Mapa kursowa</a>
+      <a href="#bilety">Bilety</a>
+      <a href="#aplikacja">Aplikacja</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a href="tel:+48694829661" class="btn btn--gold btn--sm nav__cta">
+      <svg class="i" viewBox="0 0 24 24"><use href="#i-phone"/></svg>694 829 661
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Otwórz menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================ START -->
+<section class="hero" id="top">
+  <svg class="hero__mountains" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path class="ridge ridge--3" d="M0 150 L90 112 L170 132 L260 82 L340 112 L430 60 L520 102 L610 70 L700 96 L790 38 L880 86 L960 64 L1060 104 L1150 58 L1240 92 L1330 70 L1440 100 V300 H0Z"/>
+    <path class="ridge ridge--2" d="M0 196 L120 160 L220 184 L330 138 L450 176 L560 134 L680 172 L800 124 L920 168 L1030 142 L1150 174 L1270 132 L1440 166 V300 H0Z"/>
+    <path class="ridge ridge--1" d="M0 240 C160 204 260 234 400 212 C560 188 640 228 800 206 C960 184 1060 224 1200 202 C1300 188 1380 204 1440 198 V300 H0Z"/>
+    <path id="road" class="road" d="M-40 286 C160 254 260 280 420 262 C600 242 700 276 880 256 C1040 238 1160 268 1300 250 C1380 240 1420 246 1480 242"/>
+    <path class="road__dash" d="M-40 286 C160 254 260 280 420 262 C600 242 700 276 880 256 C1040 238 1160 268 1300 250 C1380 240 1420 246 1480 242"/>
+    <g id="hero-bus" class="hero-bus">
+      <rect x="-30" y="-17" width="60" height="26" rx="7" class="hero-bus__body"/>
+      <rect x="-24" y="-12" width="12" height="8" rx="2" class="hero-bus__win"/>
+      <rect x="-9" y="-12" width="12" height="8" rx="2" class="hero-bus__win"/>
+      <rect x="6" y="-12" width="12" height="8" rx="2" class="hero-bus__win"/>
+      <rect x="21" y="-12" width="6" height="12" rx="2" class="hero-bus__win"/>
+      <circle cx="-16" cy="10" r="5" class="hero-bus__wheel"/>
+      <circle cx="17" cy="10" r="5" class="hero-bus__wheel"/>
+    </g>
+  </svg>
+
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <h1 class="hero__logo reveal"><img src="assets/img/strozak-logo.svg" alt="Stróżak — transport osobowy" width="560" height="148"></h1>
+      <p class="hero__lead reveal">Transport osobowy Jerzy Stróżak — przewozy regularne i&nbsp;okazjonalne.<br><span class="hero__route">Mszana Dolna · Podobin · Niedźwiedź · Konina · Poręba Wielka · Koninki</span></p>
+      <div class="hero__ctas reveal">
+        <a href="#rozklad" class="btn btn--gold">Rozkład jazdy</a>
+        <a href="#na-zywo" class="btn btn--ghost"><span class="dot dot--live"></span>Busy na mapie</a>
+        <a href="#bilety" class="btn btn--ghost">Bilety</a>
+      </div>
+    </div>
+
+    <aside class="card next reveal" aria-label="Najbliższe odjazdy">
+      <div class="next__head">
+        <div>
+          <p class="next__label">Najbliższe odjazdy</p>
+          <p class="next__clock" id="hero-clock">--:--</p>
+        </div>
+        <div class="seg" role="tablist" id="next-tabs">
+          <button role="tab" aria-selected="true" data-dir="out">z Mszany</button>
+          <button role="tab" aria-selected="false" data-dir="back">do Mszany</button>
+        </div>
+      </div>
+      <ol class="next__list" id="next-list"></ol>
+      <p class="next__foot" id="next-foot"></p>
+    </aside>
+  </div>
+
+  <div class="wrap" id="oferta">
+    <h2 class="hero__offer-title reveal">Oferta</h2>
+    <div class="offer reveal">
+      <a class="offer__item offer__item--wide" href="#rozklad">
+        <span class="offer__icon"><svg class="i" viewBox="0 0 24 24"><use href="#i-bus"/></svg></span>
+        <span class="offer__text"><b>Przewozy regularne</b><small>Mszana Dolna – Konina · Poręba Górna · Koninki</small></span>
+        <span class="offer__lines"><i style="background:var(--l16)">16</i><i style="background:var(--l17)">17</i><i style="background:var(--l18)">18</i></span>
+      </a>
+      <a class="offer__item" href="#przewozy"><span class="offer__icon"><svg class="i" viewBox="0 0 24 24"><use href="#i-rings"/></svg></span><span class="offer__text"><b>Wesela</b><small>przewóz gości</small></span></a>
+      <a class="offer__item" href="#przewozy"><span class="offer__icon"><svg class="i" viewBox="0 0 24 24"><use href="#i-candle"/></svg></span><span class="offer__text"><b>Komunie</b><small>i uroczystości rodzinne</small></span></a>
+      <a class="offer__item" href="#przewozy"><span class="offer__icon"><svg class="i" viewBox="0 0 24 24"><use href="#i-school"/></svg></span><span class="offer__text"><b>Wycieczki szkolne</b><small>busy z pasami, autokar 53 miejsca</small></span></a>
+      <a class="offer__item" href="#przewozy"><span class="offer__icon"><svg class="i" viewBox="0 0 24 24"><use href="#i-mountain"/></svg></span><span class="offer__text"><b>Wycieczki indywidualne</b><small>trasa według Waszego planu</small></span></a>
+      <a class="offer__item" href="#bilety"><span class="offer__icon"><svg class="i" viewBox="0 0 24 24"><use href="#i-ticket"/></svg></span><span class="offer__text"><b>Bilet miesięczny</b><small>w aplikacji i Apple Wallet</small></span></a>
+    </div>
+    <p class="hero__promo reveal"><span class="badge badge--gold">%</span> Dla stałych klientów rabaty</p>
+  </div>
+</section>
+
+<!-- ============================================================ ROZKŁAD -->
+<section class="section section--alt" id="rozklad">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <h2>Rozkład jazdy</h2>
+      <p class="section__lead">Obowiązuje od 01.2026. Wybierz linię, kierunek i przystanek.</p>
+    </header>
+
+    <div class="tt card reveal">
+      <div class="tt__bar">
+        <div class="tt__lines" id="tt-lines" role="tablist"></div>
+        <div class="seg" id="tt-dir" role="tablist"></div>
+        <div class="seg" id="tt-day" role="tablist">
+          <button data-day="weekday" aria-selected="true">Dni robocze</button>
+          <button data-day="saturday" aria-selected="false">Soboty</button>
+        </div>
+      </div>
+      <label class="field">
+        <span>Przystanek</span>
+        <select id="tt-stop"></select>
+      </label>
+      <div class="tt__times" id="tt-times"></div>
+      <p class="tt__legend"><span class="badge badge--s">S</span> kursuje w dni nauki szkolnej · nie kursuje w święta, w Wielką Sobotę oraz 24 i 31 grudnia · w niedziele brak kursów</p>
+      <details class="tt__full">
+        <summary>Pełny rozkład linii (wszystkie przystanki)</summary>
+        <div class="tt__matrix" id="tt-matrix"></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ NA ŻYWO -->
+<section class="section" id="na-zywo">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <h2>Busy na mapie</h2>
+      <p class="section__lead">Położenie busów wyliczane na bieżąco z rozkładu jazdy. Po montażu nadajników GPS mapa pokaże rzeczywistą pozycję.</p>
+    </header>
+
+    <div class="live reveal">
+      <div class="live__map">
+        <div id="map" class="map" role="region" aria-label="Mapa z busami"></div>
+        <div class="map__chips" id="map-chips"></div>
+        <div class="map__time">
+          <span class="dot dot--live" id="time-dot"></span>
+          <span id="time-readout">--:--:--</span>
+          <span class="map__mode" id="time-mode">teraz</span>
+        </div>
+      </div>
+      <aside class="live__side">
+        <div class="live__controls">
+          <button class="btn btn--sm btn--ghost is-active" id="btn-now">Teraz</button>
+          <button class="btn btn--sm btn--ghost" id="btn-sim">Symulacja poranka ×20</button>
+        </div>
+        <p class="live__empty" id="live-empty" hidden></p>
+        <ul class="buslist" id="bus-list"></ul>
+        <p class="note">Symulacja na podstawie rozkładu od 01.2026. Kursy szkolne jeżdżą tylko w dni nauki.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SCHEMAT -->
+<section class="section section--alt" id="siec">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <h2>Mapa kursowa</h2>
+      <p class="section__lead">Kliknij przystanek, żeby zobaczyć najbliższe odjazdy.</p>
+    </header>
+    <div class="legend reveal" id="legend"></div>
+    <div class="schema reveal">
+      <div class="schema__scroll"><svg id="schema" class="schema__svg" role="img" aria-label="Schemat linii 16, 17 i 18"></svg></div>
+      <div class="stop-panel card" id="stop-panel" hidden>
+        <button class="stop-panel__close" id="stop-close" aria-label="Zamknij">×</button>
+        <p class="stop-panel__zone" id="sp-zone"></p>
+        <h3 id="sp-name"></h3>
+        <div id="sp-deps"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ BILETY -->
+<section class="section" id="bilety">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <h2>Bilety</h2>
+      <p class="section__lead">Cena zależy od liczby stref na trasie. Bilet miesięczny jest ważny 30 dni od wybranego dnia.</p>
+    </header>
+
+    <div class="zones reveal" id="zones"></div>
+
+    <div class="calc card reveal">
+      <div class="calc__inputs">
+        <label class="field"><span>Skąd</span><select id="calc-from"></select></label>
+        <button class="calc__swap" id="calc-swap" aria-label="Zamień przystanki">
+          <svg class="i" viewBox="0 0 24 24"><use href="#i-swap"/></svg>
+        </button>
+        <label class="field"><span>Dokąd</span><select id="calc-to"></select></label>
+        <div class="field">
+          <span>Ulga (bilet miesięczny)</span>
+          <div class="seg seg--full" id="calc-disc" role="tablist"></div>
+        </div>
+      </div>
+      <p class="calc__zones" id="calc-zones"></p>
+      <div class="prices">
+        <article class="price">
+          <svg class="i i--lg" viewBox="0 0 24 24"><use href="#i-ticket"/></svg>
+          <h3>Jednorazowy</h3>
+          <p class="price__val" id="price-single">–</p>
+          <p class="price__desc">U kierowcy lub w aplikacji. Ulgi ustawowe honorujemy przy zakupie u kierowcy.</p>
+        </article>
+        <article class="price">
+          <svg class="i i--lg" viewBox="0 0 24 24"><use href="#i-stack"/></svg>
+          <h3>10 przejazdów</h3>
+          <p class="price__val" id="price-ten">–</p>
+          <p class="price__desc">Karnet w aplikacji, 10% taniej. Przejazd kasujesz jednym dotknięciem.</p>
+        </article>
+        <article class="price price--hero">
+          <svg class="i i--lg" viewBox="0 0 24 24"><use href="#i-calendar"/></svg>
+          <h3>Miesięczny · 30 dni</h3>
+          <p class="price__val" id="price-month">–</p>
+          <p class="price__desc" id="price-month-desc">Imienny, bez limitu przejazdów na wybranej relacji.</p>
+        </article>
+      </div>
+      <p class="note">Ceny w nowym cenniku są propozycją do zatwierdzenia przez przewoźnika. Ulgi ustawowe na bilety miesięczne: uczniowie 49%, studenci do 26 lat 51%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ APLIKACJA -->
+<section class="section section--alt" id="aplikacja">
+  <div class="wrap app">
+    <div class="app__copy">
+      <header class="section__head section__head--left reveal">
+        <h2>Aplikacja na iPhone</h2>
+        <p class="section__lead">Bilet miesięczny, rozkład jazdy i busy na mapie w jednym miejscu.</p>
+      </header>
+      <ul class="features reveal">
+        <li><svg class="i" viewBox="0 0 24 24"><use href="#i-wallet"/></svg><div><h3>Apple Wallet</h3><p>Bilet w Portfelu. Przy przystanku pojawia się sam na ekranie blokady.</p></div></li>
+        <li><svg class="i" viewBox="0 0 24 24"><use href="#i-shield"/></svg><div><h3>Kontrola biletu</h3><p>Animowany hologram, zegar z sekundami i kolor dnia — łatwo odróżnić bilet od zrzutu ekranu.</p></div></li>
+        <li><svg class="i" viewBox="0 0 24 24"><use href="#i-map"/></svg><div><h3>Busy na mapie</h3><p>Pozycja busa i czas dojazdu na Twój przystanek.</p></div></li>
+        <li><svg class="i" viewBox="0 0 24 24"><use href="#i-id"/></svg><div><h3>Legitymacja przy bilecie</h3><p>Numer legitymacji zapisany przy bilecie ulgowym i przypomnienie o podbiciu przed 30 września.</p></div></li>
+      </ul>
+      <div class="app__badges reveal">
+        <span class="store-badge"><svg class="i" viewBox="0 0 24 24"><use href="#i-apple"/></svg><span><small>Wkrótce w</small>App Store</span></span>
+        <span class="wallet-badge"><svg class="i" viewBox="0 0 24 24"><use href="#i-wallet"/></svg><span><small>Dodaj do</small>Apple Wallet</span></span>
+      </div>
+    </div>
+
+    <div class="app__stage reveal">
+      <div class="phone" id="phone">
+        <div class="phone__notch"></div>
+        <div class="phone__screen">
+          <div class="phone__status"><span id="phone-time">9:41</span><span class="phone__icons">●●● ▮</span></div>
+          <p class="phone__title">Bilety</p>
+          <div class="ticket" id="ticket">
+            <div class="ticket__sheen"></div>
+            <div class="ticket__band"><img src="assets/img/strozak-logo.svg" alt="" width="92" height="24"><span class="ticket__live"><span class="dot dot--live"></span>aktywny</span></div>
+            <div class="ticket__body">
+              <p class="ticket__type">Miesięczny · Uczeń −49%</p>
+              <p class="ticket__rel">Konina Szkoła<span>⇄</span>Mszana Dolna ZSTI</p>
+              <div class="ticket__meta">
+                <div><small>Strefy</small><b>1–3</b></div>
+                <div><small>Ważny</small><b id="ticket-valid">12.11 – 11.12</b></div>
+                <div><small>Pasażer</small><b>Jan Kowalski</b></div>
+              </div>
+              <div class="ticket__code">
+                <svg id="aztec" viewBox="0 0 27 27" shape-rendering="crispEdges" aria-label="Kod biletu"></svg>
+                <div class="ticket__clock">
+                  <small>Kontrola</small>
+                  <b id="ticket-clock">00:00:00</b>
+                  <span class="ticket__day"><span class="ticket__daydot" id="ticket-daydot"></span>kolor dnia</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="phone__wallet"><svg class="i" viewBox="0 0 24 24"><use href="#i-wallet"/></svg>Dodaj do Apple Wallet</button>
+        </div>
+      </div>
+
+      <div class="pass" aria-label="Bilet w Apple Wallet">
+        <div class="pass__top"><img src="assets/img/strozak-logo.svg" alt="" width="70" height="18"><span>MIESIĘCZNY</span></div>
+        <div class="pass__route">
+          <div><small>Z</small><b>KONINA</b><span>Szkoła</span></div>
+          <svg class="i" viewBox="0 0 24 24"><use href="#i-bus"/></svg>
+          <div class="ta-r"><small>DO</small><b>MSZANA D.</b><span>ZSTI</span></div>
+        </div>
+        <div class="pass__row"><div><small>STREFY</small>1–3</div><div><small>ULGA</small>49%</div><div class="ta-r"><small>WAŻNY DO</small><span id="pass-valid">11.12.2026</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap shots" id="app-shots" hidden></div>
+</section>
+
+<!-- ============================================================ PRZEWOZY -->
+<section class="section" id="przewozy">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <h2>Przewozy okazjonalne</h2>
+      <p class="section__lead">Wesela, komunie, wycieczki szkolne i indywidualne oraz wiele innych. Dla stałych klientów rabaty.</p>
+    </header>
+    <div class="services" id="services"></div>
+    <div class="cta-band reveal">
+      <div>
+        <h3>Wycena przejazdu</h3>
+        <p>Podaj datę, trasę i liczbę osób — dobierzemy busa lub autokar.</p>
+      </div>
+      <div class="cta-band__btns">
+        <a class="btn btn--gold" href="tel:+48694829661"><svg class="i" viewBox="0 0 24 24"><use href="#i-phone"/></svg>694 829 661</a>
+        <a class="btn btn--ghost" href="mailto:bus.strozak.261@wp.pl?subject=Zapytanie%20o%20przew%C3%B3z%20okazjonalny"><svg class="i" viewBox="0 0 24 24"><use href="#i-mail"/></svg>Napisz e-mail</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FLOTA -->
+<section class="section section--alt" id="flota">
+  <div class="wrap">
+    <header class="section__head reveal">
+      <h2>Flota</h2>
+    </header>
+    <div class="fleet" id="fleet"></div>
+  </div>
+</section>
+
+<!-- ============================================================ KONTAKT -->
+<section class="section" id="kontakt">
+  <div class="wrap contact">
+    <div class="reveal">
+      <h2>Kontakt</h2>
+      <p class="contact__addr"><b>Jerzy Stróżak</b><br>Transport Osobowy Stróżak Jerzy<br>Poręba Wielka 261, 34-735 Niedźwiedź<br>NIP 737-171-84-68</p>
+    </div>
+    <div class="contact__cards reveal">
+      <a class="card contact__card" href="tel:+48694829661"><svg class="i" viewBox="0 0 24 24"><use href="#i-phone"/></svg><small>Telefon komórkowy</small><b>694 829 661</b></a>
+      <a class="card contact__card" href="tel:+48183317234"><svg class="i" viewBox="0 0 24 24"><use href="#i-phone"/></svg><small>Telefon stacjonarny</small><b>(18) 33 17 234</b></a>
+      <a class="card contact__card" href="mailto:bus.strozak.261@wp.pl"><svg class="i" viewBox="0 0 24 24"><use href="#i-mail"/></svg><small>E-mail</small><b>bus.strozak.261@wp.pl</b></a>
+      <a class="card contact__card" href="https://www.google.com/maps/search/?api=1&query=Por%C4%99ba+Wielka+261+Nied%C5%BAwied%C5%BA" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><use href="#i-pin"/></svg><small>Adres</small><b>Poręba Wielka 261</b></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <img src="assets/img/strozak-logo.svg" alt="Stróżak" width="150" height="40">
+    <p>Przewozy regularne: Mszana Dolna – Konina · Mszana Dolna – Poręba Górna · Mszana Dolna – Poręba Hucisko (Koninki)<br>Przewozy okazjonalne: wesela, komunie, wycieczki szkolne i indywidualne.</p>
+    <div class="footer__pfr"><img src="assets/img/pfr.png" alt="Przedsiębiorca uzyskał subwencję finansową w ramach programu rządowego „Tarcza Finansowa 2.0 Polskiego Funduszu Rozwoju dla Mikro, Małych i Średnich Firm” udzieloną przez PFR SA." loading="lazy"></div>
+    <p class="footer__copy">© 2026 Transport Osobowy Stróżak Jerzy · Dane map © OpenStreetMap · OpenFreeMap</p>
+  </div>
+</footer>
+
+<!-- ikony -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-bus" viewBox="0 0 24 24"><path d="M5 17V6a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v11M5 17h14M5 17v2m14-2v2M5 11h14M8 14.5h.01M16 14.5h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 0 0 4v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2zm11-4v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="M4 9h16v10H4zM6 6h12M8 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM4 10h16M8 3v4m8-4v4M8 14h3v3H8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2-2h11v4M4 7v10a2 2 0 0 0 2 2h13V9H6a2 2 0 0 1-2-2zm12 7h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6zm-3 9l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zm0 0v14m6-12v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24"><path d="M3 6h18v12H3zM7 15c.5-1.5 1.5-2 2.5-2s2 .5 2.5 2M9.5 11.5h.01M14 10h4M14 13h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.8-3.5.8s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.7zM14.1 5.8c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.1 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3zm0 1l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4m4 4H7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-rings" viewBox="0 0 24 24"><path d="M9 21a6 6 0 1 0 0-12 6 6 0 0 0 0 12zm6 0a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM9 6l1.5-3h3L15 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-candle" viewBox="0 0 24 24"><path d="M9 10h6v11H9zM12 10V7m0-4c1.5 1.6 1.5 3 0 4-1.5-1-1.5-2.4 0-4zM6 21h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-school" viewBox="0 0 24 24"><path d="M7 8V6a5 5 0 0 1 10 0v2M5 8h14v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zm4 5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mountain" viewBox="0 0 24 24"><path d="M2 20l7-12 4 6 3-4 6 10zM9 8l2 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM19 3v4m-2-2h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-belt" viewBox="0 0 24 24"><path d="M6 3l12 18M9 14h6v4H9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="data/network.js?v=3"></script>
+<script>
+  window.APP_SHOTS = [
+    { src: "assets/img/app/01-bilety.jpg", caption: "Bilet miesięczny" },
+    { src: "assets/img/app/02-kontrola-biletu.jpg", caption: "Kontrola biletu" },
+    { src: "assets/img/app/03-kup-bilet.jpg", caption: "Zakup biletu" },
+    { src: "assets/img/app/04-mapa-na-zywo.jpg", caption: "Busy na mapie" },
+    { src: "assets/img/app/05-bus-na-trasie.jpg", caption: "Bus na trasie" },
+    { src: "assets/img/app/06-rozklad.jpg", caption: "Rozkład jazdy" },
+    { src: "assets/img/app/07-oferta.jpg", caption: "Oferta" }
+  ];
+</script>
+<script src="assets/js/app.js?v=3"></script>
+</body>
+</html>
